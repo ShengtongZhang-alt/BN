@@ -1,6 +1,6 @@
 # The Bollobás–Nikiforov Inequality in Lean
 
-**Author:** Shengtong Zhang
+**Authors:** Gabriel Coutinho, Yinchen Liu, Thomás Jung Spier, Quanyu Tang, Shengtong Zhang
 
 Formalization completed by Grok 4.6 in the Cursor Editor.
 

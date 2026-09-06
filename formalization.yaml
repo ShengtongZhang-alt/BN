@@ -38,6 +38,10 @@ project:
     headline theorems are proved with no sorry and depend only on propext,
     Classical.choice and Quot.sound.
   authors:
+    - "Gabriel Coutinho"
+    - "Yinchen Liu"
+    - "Thomás Jung Spier"
+    - "Quanyu Tang"
     - "Shengtong Zhang"
   license: "Apache-2.0"
   responsible_maintainers:
@@ -53,6 +57,10 @@ classification:
 sources:
   - title: "The Bollobás–Nikiforov inequality for nonnegative edge weights"
     authors:
+      - "Gabriel Coutinho"
+      - "Yinchen Liu"
+      - "Thomás Jung Spier"
+      - "Quanyu Tang"
       - "Shengtong Zhang"
     id: "docs/sol.tex (this repository, at the submitted commit)"
     type: paper
@@ -235,15 +243,16 @@ automation:
         The Palomar submission surface (Challenge.lean, Solution.lean,
         comparator.json, this file, the scripts/ checks and the CI workflow)
         was assembled afterwards by a Claude Fable 5.1 agent in Cursor,
-        following the layout of the author's Nikodym repository; it adds no
+        following the layout of the maintainer's Nikodym repository; it adds no
         proof content.
       cost:
         wall_time: "Approximately one day of elapsed agent time (the development is dated 2026-09-05)."
         spend_usd: "not tracked"
         hardware: "Local Apple Silicon Mac for Lean builds; API-hosted models."
       prompting_notes: >-
-        The human author supplied the source note docs/sol.tex and the target
-        statement BN.lambda1_sq_add_lambda2_sq_le with its definitions in
+        The human maintainer (a coauthor of the source note) supplied
+        docs/sol.tex and the target statement
+        BN.lambda1_sq_add_lambda2_sq_le with its definitions in
         BN/Definition.lean, reviewed the blueprint, and directed the
         decomposition into nodes. Agents were prompted node by node with the
         blueprint statement, the mathematical proof from the note, and the
@@ -251,7 +260,7 @@ automation:
         build free of sorry.
   spend_usd: "not tracked"
   notes: >-
-    Human-directed, agent-executed workflow. The human author (author of the
+    Human-directed, agent-executed workflow. The human maintainer (a coauthor of the
     source note) fixed the Lean statement of the conjecture and the spectral
     conventions in BN/Definition.lean, approved the blueprint, and audited the
     statements in Challenge.lean against the note; Grok 4.6 agents produced
@@ -291,7 +300,7 @@ review:
     The five compared statements and the definitions they use
     (adjacencyEigenvalues₀, lambda1, lambda2, F, turanFactor, inner, posPart,
     e, IsCompletelyPositive, laplacianCoeff, M, gram, offEdgeMatrix,
-    ChiVec3Feasible, chiVec3) were audited by the human author against the
+    ChiVec3Feasible, chiVec3) were audited by the human maintainer against the
     source note (see FORMALIZATION.md for the correspondence). Every proof
     is machine-checked by Lean; `#print axioms` for each headline theorem
     reports exactly propext, Classical.choice and Quot.sound, and the pinned
