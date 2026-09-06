@@ -2,6 +2,8 @@
 
 **Authors:** Gabriel Coutinho, Yinchen Liu, Thomás Jung Spier, Quanyu Tang, Shengtong Zhang
 
+Ideation uses GPT 6 Astra.
+
 Formalization completed by Grok 4.6 in the Cursor Editor.
 
 This repository is a Lean 4 and Mathlib formalization of the Bollobás–Nikiforov
