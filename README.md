@@ -74,15 +74,19 @@ triangle-free graphs by Lin, Ning and Wu
 [[LNW21]](https://doi.org/10.1017/S0963548320000462), for regular graphs
 [[Zha24]](https://doi.org/10.1016/j.laa.2024.01.002), for graphs with few
 triangles [[KP25]](https://arxiv.org/abs/2407.19341) and for related classes
-(Zeng–Zhang), and asymptotically almost surely for random graphs
-[[LB25]](https://arxiv.org/abs/2501.07137). Coutinho, Spier and Zhang
+[[ZZ25]](https://doi.org/10.1016/j.laa.2025.01.037), and asymptotically almost surely for random graphs
+[[LB25]](https://arxiv.org/abs/2501.07137). Complete multipartite graphs are
+weakly perfect and hence covered by [AL15]; Giacomelli
+[[Gia26]](https://arxiv.org/abs/2603.26379) gives a self-contained treatment of
+that class, and the dense $K_4$-free result announced in its abstract is not
+proven in its body. Coutinho, Spier and Zhang
 [[CSZ24]](https://arxiv.org/abs/2411.08184) proved a version with weaker
 constants for all graphs via conic programming and introduced the rank-two
 program $\chi''_{\mathrm{vec},3}$, conjecturing that it equals $\omega(G)$ for
 large clique number.
 
 The results formalized here prove the conjecture for all graphs, in the
-stronger weighted form, and proves $\chi''_{\mathrm{vec},3}(G) = \omega(G)$ for every graph. 
+stronger weighted form, and prove $\chi''_{\mathrm{vec},3}(G) = \omega(G)$ for every graph.
 The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz and Wocjan [[ELW24]](https://doi.org/10.1016/j.laa.2023.12.010) is not addressed.
 
 ### References
@@ -90,6 +94,7 @@ The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz 
 - [AL15] T. Ando, M. Lin, *Proof of a conjectured lower bound on the chromatic number of a graph*, Linear Algebra Appl. 485 (2015), 480–484. [doi:10.1016/j.laa.2015.08.007](https://doi.org/10.1016/j.laa.2015.08.007)
 - [BN07] B. Bollobás, V. Nikiforov, *Cliques and the spectral radius*, J. Combin. Theory Ser. B 97 (2007), 859–865. [doi:10.1016/j.jctb.2006.12.002](https://doi.org/10.1016/j.jctb.2006.12.002)
 - [CSZ24] G. Coutinho, T. J. Spier, S. Zhang, *Conic programming to understand sums of squares of eigenvalues of graphs*, arXiv:2411.08184 (2024). [arXiv](https://arxiv.org/abs/2411.08184)
+- [Gia26] P. Giacomelli, *The Bollobás–Nikiforov conjecture for complete multipartite graphs and dense K₄-free graphs*, arXiv:2603.26379 (2026). [arXiv](https://arxiv.org/abs/2603.26379)
 - [ELW24] C. Elphick, W. Linz, P. Wocjan, *Two conjectured strengthenings of Turán's theorem*, Linear Algebra Appl. 684 (2024), 23–36. [doi:10.1016/j.laa.2023.12.010](https://doi.org/10.1016/j.laa.2023.12.010)
 - [KP25] H. Kumar, S. Pragada, *Bollobás–Nikiforov conjecture for graphs with not so many triangles*, Linear Algebra Appl. 727 (2025), 1–9. [arXiv](https://arxiv.org/abs/2407.19341)
 - [LB25] C. Liu, C. Bu, *Bollobás–Nikiforov conjecture holds asymptotically almost surely*, arXiv:2501.07137 (2025). [arXiv](https://arxiv.org/abs/2501.07137)
@@ -97,6 +102,7 @@ The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz 
 - [MS65] T. S. Motzkin, E. G. Straus, *Maxima for graphs and a new proof of a theorem of Turán*, Canad. J. Math. 17 (1965), 533–540. [doi:10.4153/CJM-1965-053-6](https://doi.org/10.4153/CJM-1965-053-6)
 - [Nik02] V. Nikiforov, *Some inequalities for the largest eigenvalue of a graph*, Combin. Probab. Comput. 11 (2002), 179–189. [doi:10.1017/S0963548301004928](https://doi.org/10.1017/S0963548301004928)
 - [Zha24] S. Zhang, *On the first two eigenvalues of regular graphs*, Linear Algebra Appl. 686 (2024), 102–110. [doi:10.1016/j.laa.2024.01.002](https://doi.org/10.1016/j.laa.2024.01.002)
+- [ZZ25] J. Zeng, X.-D. Zhang, *A note on the Bollobás–Nikiforov conjecture*, Linear Algebra Appl. 710 (2025), 230–242. [doi:10.1016/j.laa.2025.01.037](https://doi.org/10.1016/j.laa.2025.01.037)
 
 ## Writeup
 

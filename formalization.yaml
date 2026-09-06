@@ -166,11 +166,50 @@ sources:
     location: "https://arxiv.org/abs/2501.07137"
     relationship: background
     note: "The conjecture for random graphs, asymptotically almost surely."
+  - title: "A note on the Bollobás–Nikiforov conjecture"
+    authors: ["Jiasheng Zeng", "Xiao-Dong Zhang"]
+    id: "doi:10.1016/j.laa.2025.01.037"
+    type: paper
+    location: "https://doi.org/10.1016/j.laa.2025.01.037"
+    relationship: background
+    note: >-
+      Linear Algebra Appl. 710 (2025), 230–242. The conjecture for line graphs
+      and further classes with few triangles.
+  - title: "The Bollobás–Nikiforov conjecture for complete multipartite graphs and dense K_4-free graphs"
+    authors: ["Piero Giacomelli"]
+    id: "arXiv:2603.26379"
+    type: paper
+    location: "https://arxiv.org/abs/2603.26379"
+    relationship: background
+    note: >-
+      arXiv:2603.26379 (v3, 2026). Its Theorem 1.2 proves the conjecture for
+      complete multipartite graphs K_{n_1,...,n_r} with n > r, including the
+      equality cases; as its own Remark 1.3 records, this class is weakly
+      perfect and hence already covered by Ando–Lin, and its Theorem 1.4 and
+      Corollary 1.7 restate Lin–Ning–Wu and Zhang. The dense K_4-free result
+      announced in its title and abstract (the conjecture for K_4-free graphs
+      with m = Omega(n^2)) is not proven in its body: the required stability
+      statement appears there as Conjecture 4.7 in a section marked open, and
+      Remark 4.8 notes the perturbation argument gives only 4m/3 + O(eps m).
+      Listed for completeness; every case it proves is a special case of the
+      theorem formalized here.
 
-# We are not aware of a previous Lean formalization of the Bollobás–Nikiforov
-# conjecture, of the Motzkin–Straus inequality, or of completely positive /
-# totally nonnegative matrices; left empty deliberately.
-related_formalizations: []
+# Prior Lean work by overlapping authors. We are not aware of a previous Lean
+# formalization of the Bollobás–Nikiforov conjecture itself, or of completely
+# positive / totally nonnegative matrices.
+related_formalizations:
+  - id: "https://github.com/ShengtongZhang-alt/SqOmega/tree/e988319dceceb94ae956890a3547af0062465e3e"
+    relationship: independent
+    note: >-
+      Lean 4 / Mathlib formalization (Liu, Tang, Zhang; public since July
+      2026) of the square-energy strengthening of Turán's theorem
+      sqrt(s^+(G)), sqrt(s^-(G)) <= (1 - 1/omega(G)) n. It contains a
+      doubly-nonnegative Motzkin–Straus inequality
+      (SqOmega/DNN/MotzkinStraus.lean, dnnMotzkinStraus_*) proved via the
+      Caro–Wei random partition, with vertex-count normalization. The present
+      repository shares no code with it: Motzkin–Straus is used here in
+      completely positive form with nonnegative edge weights (BN/MS/), which
+      is what the edge-count bound 2 (1 - 1/omega) |E| requires.
 
 status:
   scope: >-
