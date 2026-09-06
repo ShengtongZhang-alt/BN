@@ -81,13 +81,14 @@ large clique number.
 
 The results formalized here prove the conjecture for all graphs, in the
 stronger weighted form, and proves $\chi''_{\mathrm{vec},3}(G) = \omega(G)$ for every graph. 
-The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz and Wocjan is not addressed.
+The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz and Wocjan [[ELW24]](https://doi.org/10.1016/j.laa.2023.12.010) is not addressed.
 
 ### References
 
 - [AL15] T. Ando, M. Lin, *Proof of a conjectured lower bound on the chromatic number of a graph*, Linear Algebra Appl. 485 (2015), 480–484. [doi:10.1016/j.laa.2015.08.007](https://doi.org/10.1016/j.laa.2015.08.007)
 - [BN07] B. Bollobás, V. Nikiforov, *Cliques and the spectral radius*, J. Combin. Theory Ser. B 97 (2007), 859–865. [doi:10.1016/j.jctb.2006.12.002](https://doi.org/10.1016/j.jctb.2006.12.002)
 - [CSZ24] G. Coutinho, T. J. Spier, S. Zhang, *Conic programming to understand sums of squares of eigenvalues of graphs*, arXiv:2411.08184 (2024). [arXiv](https://arxiv.org/abs/2411.08184)
+- [ELW24] C. Elphick, W. Linz, P. Wocjan, *Two conjectured strengthenings of Turán's theorem*, Linear Algebra Appl. 684 (2024), 23–36. [doi:10.1016/j.laa.2023.12.010](https://doi.org/10.1016/j.laa.2023.12.010)
 - [KP25] H. Kumar, S. Pragada, *Bollobás–Nikiforov conjecture for graphs with not so many triangles*, Linear Algebra Appl. 727 (2025), 1–9. [arXiv](https://arxiv.org/abs/2407.19341)
 - [LB25] C. Liu, C. Bu, *Bollobás–Nikiforov conjecture holds asymptotically almost surely*, arXiv:2501.07137 (2025). [arXiv](https://arxiv.org/abs/2501.07137)
 - [LNW21] H. Lin, B. Ning, B. Wu, *Eigenvalues and triangles in graphs*, Combin. Probab. Comput. 30 (2021), 258–270. [doi:10.1017/S0963548320000462](https://doi.org/10.1017/S0963548320000462)
