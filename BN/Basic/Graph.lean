@@ -14,6 +14,9 @@ import Mathlib.Data.Real.Basic
 These lemmas make the paper's assumptions `n ≥ 1` and `ω ≥ 1` explicit and
 isolate the edgeless `ω = 1` case. The Turán factor is the coefficient
 `1 - 1 / ω(G)` in Turán-type bounds.
+
+This module is copied, up to the namespace, from `SqOmega/Graph.lean` in
+<https://github.com/ShengtongZhang-alt/SqOmega> (Liu, Tang, Zhang).
 -/
 
 namespace BN

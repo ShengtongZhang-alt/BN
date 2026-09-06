@@ -199,17 +199,22 @@ sources:
 # positive / totally nonnegative matrices.
 related_formalizations:
   - id: "https://github.com/ShengtongZhang-alt/SqOmega/tree/e988319dceceb94ae956890a3547af0062465e3e"
-    relationship: independent
+    relationship: builds-on
     note: >-
       Lean 4 / Mathlib formalization (Liu, Tang, Zhang; public since July
       2026) of the square-energy strengthening of Turán's theorem
       sqrt(s^+(G)), sqrt(s^-(G)) <= (1 - 1/omega(G)) n. It contains a
       doubly-nonnegative Motzkin–Straus inequality
       (SqOmega/DNN/MotzkinStraus.lean, dnnMotzkinStraus_*) proved via the
-      Caro–Wei random partition, with vertex-count normalization. The present
-      repository shares no code with it: Motzkin–Straus is used here in
+      Caro–Wei random partition, with vertex-count normalization. Code
+      reuse: BN/Basic/Graph.lean (turanFactor and the elementary
+      clique-number lemmas one_le_cliqueNum, two_le_cliqueNum_of_adj,
+      cliqueNum_eq_one_iff_eq_bot, turanFactor_nonneg, turanFactor_pos) is
+      copied from SqOmega/Graph.lean with a namespace change. The rest of the
+      development is independent of SqOmega: Motzkin–Straus is used here in
       completely positive form with nonnegative edge weights (BN/MS/), which
-      is what the edge-count bound 2 (1 - 1/omega) |E| requires.
+      is what the edge-count bound 2 (1 - 1/omega) |E| requires, and none
+      of the DNN or Caro–Wei material is reused.
 
 status:
   scope: >-
