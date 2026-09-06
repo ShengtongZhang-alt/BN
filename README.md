@@ -38,10 +38,10 @@ The coefficient is best possible for every graph with an edge. The proof rests
 on a matrix theorem. For a positive semidefinite $X$ put
 
 $$
-\mathcal M(X) = X \circ X + \sum_{i<j:\,X_{ij}<0} X_{ij}^2\,(e_i - e_j)(e_i - e_j)^{\mathsf T}.
+\mathcal{M}(X) =  X \circ X + \sum_{i < j: X_{ij} < 0} X_{ij}^2 (e_i - e_j)(e_i - e_j)^T.
 $$
 
-**Planar Gram matrices.** If $X_{ij} = z_i^{\mathsf T} z_j$ with
+**Planar Gram matrices.** If $X_{ij} = z_i^{\top} z_j$ with
 $z_1, \dots, z_n \in \mathbb R^2$ lying in a closed half-plane through the
 origin, then $\mathcal M(X)$ is completely positive.
 
@@ -66,7 +66,7 @@ Nikiforov [[Nik02]](https://doi.org/10.1017/S0963548301004928) proved
 $\lambda_1(G)^2 \le 2(1 - 1/\omega(G))m$, and Bollobás and Nikiforov
 [[BN07]](https://doi.org/10.1016/j.jctb.2006.12.002) conjectured that the same
 right-hand side bounds $\lambda_1^2 + \lambda_2^2$ for noncomplete graphs. The
-conjecture was known for weakly perfect graphs ($\chi(G) = \omega(G)$) by the
+conjecture was known for graphs $G$ with $\chi(G) = \omega(G)$ by the
 theorem of Ando and Lin [[AL15]](https://doi.org/10.1016/j.laa.2015.08.007), for
 triangle-free graphs by Lin, Ning and Wu
 [[LNW21]](https://doi.org/10.1017/S0963548320000462), for regular graphs
@@ -80,9 +80,8 @@ program $\chi''_{\mathrm{vec},3}$, conjecturing that it equals $\omega(G)$ for
 large clique number.
 
 The results formalized here prove the conjecture for all graphs, in the
-stronger weighted form, and identify $\chi''_{\mathrm{vec},3}(G)$ with
-$\omega(G)$ for every graph. The bound with up to $\omega(G)$ positive
-eigenvalues proposed by Elphick, Linz and Wocjan is not addressed.
+stronger weighted form, and proves $\chi''_{\mathrm{vec},3}(G) = \omega(G)$ for every graph. 
+The bound with up to $\omega(G)$ positive eigenvalues proposed by Elphick, Linz and Wocjan is not addressed.
 
 ### References
 
