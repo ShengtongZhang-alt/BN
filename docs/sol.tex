@@ -1,0 +1,836 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CP}{\mathcal{CP}}
+\newcommand{\M}{\mathcal M}
+\newcommand{\F}{F_2}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+\newcommand{\fro}[1]{\lVert #1\rVert_F}
+
+\title{The Bollob\'as--Nikiforov inequality for nonnegative edge weights}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+Throughout, graphs are finite and simple, with at least one vertex.
+For a graph $G$ on $n$ vertices, let $A_G$ be its adjacency matrix,
+$m=|E(G)|$ its number of edges, and $\omega(G)$ its clique number.
+We order the adjacency eigenvalues as
+$\lambda_1(G)\ge\cdots\ge\lambda_n(G)$.
+For matrices of the same size, write
+$\ip{B}{C}=\tr(B^{\mathsf T}C)$ and
+$\fro{B}^2=\ip{B}{B}$.
+The notation $B\succeq0$ means that $B$ is real symmetric and positive
+semidefinite, whereas $B\ge0$ means entrywise nonnegativity.
+We write $B\circ C$ for the entrywise product and $B^{\circ2}=B\circ B$.
+For $t\in\R$, put $t_+=\max\{t,0\}$.
+The positive part $B_+$ is taken entrywise, so $(B_+)_{ij}=(B_{ij})_+$.
+The all-ones vector and matrix are denoted by $\mathbf1$ and $J$, respectively.
+Identity matrices and standard coordinate vectors are denoted by $I$ and $e_i$;
+their dimensions will be clear from the context.
+
+The relation between clique number and quadratic optimization goes back to
+Motzkin and Straus~\cite{MS}. Their theorem gives
+\begin{equation}\label{eq:MS}
+ y^{\mathsf T}A_Gy\le
+ \left(1-\frac1{\omega(G)}\right)(\mathbf1^{\mathsf T}y)^2
+ \qquad(y\ge0).
+\end{equation}
+This formulation provided a new proof of Tur\'an's theorem and a natural starting
+point for spectral extensions. Wilf~\cite{Wilf} obtained spectral lower bounds
+for the clique number, including
+$\lambda_1(G)\le (1-1/\omega(G))n$.
+Nikiforov~\cite{Nikiforov} subsequently proved the edge-count bound
+\[
+ \lambda_1(G)^2\le 2\left(1-\frac1{\omega(G)}\right)m.
+\]
+Bollob\'as and Nikiforov~\cite{BN} proposed that the same right-hand side controls
+the squares of the two largest eigenvalues, provided the graph is not complete.
+
+\begin{conjecture}\label{conj:BN}
+Every noncomplete graph $G$ on at least two vertices satisfies
+\[
+ \lambda_1(G)^2+\lambda_2(G)^2
+ \le 2\left(1-\frac1{\omega(G)}\right)|E(G)|.
+\]
+\end{conjecture}
+
+Several important cases have been established. The theorem of Ando and
+Lin~\cite{AL} on the sum of squares of positive eigenvalues implies the
+conjecture when the chromatic number equals the clique number.
+Lin, Ning, and Wu~\cite{LNW} proved it for triangle-free graphs and determined
+the equality cases in that setting. Zhang~\cite{Zhang} proved the regular case.
+Kumar and Pragada~\cite{KP} obtained results for graphs with few triangles,
+while Zeng and Zhang~\cite{ZZ} treated line graphs and further classes with few
+triangles. Liu and Bu~\cite{LB} established an asymptotically almost sure
+version for random graphs. The survey of Liu and Ning~\cite{LN} places the
+conjecture among related questions in spectral graph theory.
+
+Coutinho, Spier, and Zhang~\cite{CSZ} developed a conic optimization approach
+to sums of squares of eigenvalues and obtained versions of
+Conjecture~\ref{conj:BN} with weaker constants. Their work emphasizes the
+difference between complete positivity and the conjunction of positive
+semidefiniteness and entrywise nonnegativity. It also introduces a rank-two
+optimization problem whose conjectured value is the clique number.
+We use this viewpoint, together with total nonnegativity and Schur complements,
+to prove Conjecture~\ref{conj:BN}.
+
+For a real symmetric matrix $B$, let $\F(B)$ be the sum of the squares of its
+two largest positive eigenvalues, with missing terms replaced by zero.
+Our spectral result allows arbitrary nonnegative edge weights.
+
+\begin{theorem}\label{thm:weighted}
+Let $G$ be a graph, and let $B$ be a symmetric entrywise nonnegative matrix
+with zero diagonal such that $B_{ij}=0$ whenever $\{i,j\}\notin E(G)$.
+Then
+\begin{equation}\label{eq:weighted}
+ \F(B)\le\left(1-\frac1{\omega(G)}\right)\fro{B}^2.
+\end{equation}
+\end{theorem}
+
+For each fixed graph with an edge, the coefficient in~\eqref{eq:weighted}
+is best possible: one may take the adjacency matrix of a maximum clique and
+extend it by zeros. A noncomplete adjacency matrix has a nonnegative second
+largest eigenvalue, so Theorem~\ref{thm:weighted} gives
+Conjecture~\ref{conj:BN}. We supply the details in Section~\ref{sec:spectral}.
+
+A symmetric matrix $C$ is \emph{completely positive} if
+$C=\sum_{a=1}^q p_ap_a^{\mathsf T}$ for finitely many entrywise nonnegative
+vectors $p_a$. We denote this cone by $\CP_n$ in dimension $n$.
+For a positive semidefinite matrix $X$, define
+\begin{equation}\label{eq:matrix}
+ \M(X)=X^{\circ2}+
+ \sum_{i<j:X_{ij}<0}X_{ij}^2(e_i-e_j)(e_i-e_j)^{\mathsf T}.
+\end{equation}
+This matrix is positive semidefinite and entrywise nonnegative.
+The following stronger property is the main matrix result.
+
+\begin{theorem}\label{thm:matrix}
+Suppose $X_{ij}=z_i^{\mathsf T}z_j$, where $z_1,\ldots,z_n\in\R^2$.
+If there is a nonzero vector $w\in\R^2$ such that
+$w^{\mathsf T}z_i\ge0$ for every $i$, then $\M(X)$ is completely positive.
+\end{theorem}
+
+Thus a common closed half-plane, with boundary through the origin, suffices.
+In the spectral application, this condition is supplied by a nonnegative
+Perron eigenvector. In particular, irreducibility is not needed.
+After obtaining Theorem~\ref{thm:weighted}, a variational argument removes
+the half-plane restriction from the resulting scalar inequality.
+
+\begin{theorem}\label{thm:gram}
+For every graph $G$ and every real positive semidefinite matrix $X$ of rank
+at most two,
+\begin{equation}\label{eq:gram}
+ \sum_{i,j=1}^n(A_G)_{ij}(X_{ij})_+^2
+ \le\left(1-\frac1{\omega(G)}\right)\fro{X}^2.
+\end{equation}
+\end{theorem}
+
+The sum in~\eqref{eq:gram} counts each edge twice.
+This result also settles the two equivalent conjectures numbered 2 and 3
+in~\cite{CSZ}, without their restriction to sufficiently large clique number;
+see Section~\ref{subsec:conic}. The rank restriction remains essential to our
+argument. We do not address the corresponding bound involving up to
+$\omega(G)$ positive eigenvalues proposed by Elphick, Linz, and
+Wocjan~\cite{ELW}.
+
+The proof of Theorem~\ref{thm:matrix} has two parts. An ordered elimination
+produces nonnegative columns. The remaining Schur complement is the sum of
+a graph Laplacian and a matrix with an explicit three-column nonnegative
+factorization. A standard operation on completely positive matrices then
+recovers the original matrix. The sign calculation in the three-column
+factorization reduces to total nonnegativity of two rectangular matrices.
+
+Section~\ref{sec:prelim} records the facts about complete positivity and
+total nonnegativity that we use. Section~\ref{sec:kernel} proves the
+three-column factorization. Section~\ref{sec:matrix} proves
+Theorem~\ref{thm:matrix}. Section~\ref{sec:spectral} derives the spectral
+inequality, Theorem~\ref{thm:gram}, and the rank-two optimization identity.
+
+\section{Complete positivity and total nonnegativity}\label{sec:prelim}
+
+We first record a standard operation on completely positive matrices;
+compare~\cite{SMB} and the proof of Theorem 29 in~\cite{CSZ}.
+The short proof specifies exactly how much an off-diagonal entry may decrease.
+
+\begin{lemma}\label{lem:pair}
+If $C\in\CP_n$, $i\ne j$, and $0\le h\le C_{ij}$, then
+\[
+ C+h(e_i-e_j)(e_i-e_j)^{\mathsf T}\in\CP_n.
+\]
+\end{lemma}
+\begin{proof}
+First let $C=pp^{\mathsf T}$ with $p\ge0$, and write $a=p_i$, $b=p_j$.
+If $ab>0$, form $u$ and $v$ by replacing $(p_i,p_j)$ with $(a+b,0)$ and
+$(0,a+b)$, respectively, and leaving the other coordinates unchanged.
+Then
+\[
+ pp^{\mathsf T}+ab(e_i-e_j)(e_i-e_j)^{\mathsf T}
+ =\frac{a}{a+b}uu^{\mathsf T}+\frac{b}{a+b}vv^{\mathsf T}.
+\]
+Convex interpolation proves the assertion for $0\le h\le ab$.
+When $ab=0$, only $h=0$ is allowed.
+For a decomposition $C=\sum_a p_ap_a^{\mathsf T}$, distribute $h$ among
+numbers $h_a$ satisfying $0\le h_a\le(p_a)_i(p_a)_j$ and $\sum_a h_a=h$.
+Such a distribution exists because the upper bounds sum to $C_{ij}$.
+Adding the rank-one conclusions finishes the proof.
+\end{proof}
+
+A \emph{weighted graph Laplacian} means a matrix of the form
+$L=\sum_{i<j}\ell_{ij}(e_i-e_j)(e_i-e_j)^{\mathsf T}$ with $\ell_{ij}\ge0$.
+
+\begin{corollary}\label{cor:laplacian}
+If $C$ is completely positive, $L$ is a weighted graph Laplacian, and
+$C+L\ge0$ entrywise, then $C+L$ is completely positive.
+\end{corollary}
+\begin{proof}
+For each pair, entrywise nonnegativity gives $\ell_{ij}\le C_{ij}$.
+Apply Lemma~\ref{lem:pair} successively. An update on another pair does not
+change the $(i,j)$ entry, so every application satisfies its hypothesis.
+\end{proof}
+
+We also use closedness of $\CP_n$ and its closure under taking principal
+submatrices. The latter is immediate. For the former, conic
+Carath\'eodory gives a factorization with at most $n(n+1)/2$ nonnegative
+columns. If a sequence of completely positive matrices converges, its traces
+are bounded, and hence so are these columns. Padding with zero columns and
+passing to a convergent subsequence proves closedness.
+These are standard properties of the cone; see~\cite{SMB}.
+
+A matrix is \emph{totally nonnegative} if every square minor is nonnegative.
+For a kernel on ordered sets, the definition requires nonnegative determinants
+on increasing lists of row and column arguments. We use the following two
+elementary instances of this notion; general background is given in~\cite{FJ}.
+
+\begin{lemma}\label{lem:truncated}
+The kernel $K(a,t)=(t-a)_+^2$ is totally nonnegative.
+\end{lemma}
+\begin{proof}
+The step kernel $H(a,t)=\mathbf1_{\{a\le t\}}$ has ordered minors equal to
+zero or one. Indeed, its rows have nested terminal intervals of ones;
+subtracting each successive row from the preceding row verifies the claim.
+The continuous Cauchy--Binet identity implies that composition preserves total
+nonnegativity: an ordered minor of a composed kernel is the integral over
+increasing intermediate arguments of a product of ordered minors.
+All integrations here may be restricted to a bounded interval containing the
+external arguments. Since
+\[
+ \int\!\!\int H(a,s)H(s,u)H(u,t)\,ds\,du=\tfrac12(t-a)_+^2,
+\]
+two compositions and positive scaling give the result.
+\end{proof}
+
+\begin{lemma}\label{lem:convex}
+Let $f:[0,\infty)\to[0,\infty)$ be convex with $f(0)=0$.
+For $0<t_1\le\cdots\le t_k$, the matrix whose $i$th row is
+$(1,t_i,f(t_i))$ is totally nonnegative.
+\end{lemma}
+\begin{proof}
+Convexity and $f(0)=0$ imply that $f(t)/t$ is nondecreasing for $t>0$.
+Since $f\ge0$, the function $f$ is also nondecreasing. These observations
+verify all minors of orders one and two.
+For $t<u<v$, the minor of order three is
+\[
+ (u-t)\bigl(f(v)-f(t)\bigr)
+ -(v-t)\bigl(f(u)-f(t)\bigr),
+\]
+which is nonnegative by convexity. Repeated arguments give zero minors.
+There are only three columns, so no larger minors need to be considered.
+\end{proof}
+
+\section{A three-column nonnegative factorization}\label{sec:kernel}
+
+Fix $0<t_1\le\cdots\le t_k$, $q_i>0$, and $\gamma>0$.
+In this section the coordinates of $\R^3$ are numbered $0,1,2$.
+For $x\ge0$, set
+\[
+\begin{gathered}
+ v(t)=(1,-\sqrt2t,t^2)^{\mathsf T},\qquad
+ b(x)=(x^2,\sqrt2x,1)^{\mathsf T},\qquad a_i(x)=(x-t_i)_+^2,\\
+ \mathcal A=I_3+\sum_iq_iv(t_i)v(t_i)^{\mathsf T},\qquad V=\mathcal A e_0,\\
+ h(x)=\sum_iq_i a_i(x),\qquad h_1(x)=\sum_iq_it_i a_i(x),\\
+ \widehat b(x)=b(x)+\sum_iq_i a_i(x)v(t_i),\qquad
+ U(x)=\widehat b(x)+\frac{h(x)}\gamma V,\\
+ \mathcal K=\left(\mathcal A+\frac{VV^{\mathsf T}}\gamma\right)^{-1}.
+\end{gathered}
+\]
+Write $m_j=\sum_iq_it_i^j$ for $0\le j\le4$, and define
+\[
+ a_0=1+m_0,\qquad D_2=a_0(1+2m_2)-2m_1^2,\qquad
+ \Delta=\det\mathcal A.
+\]
+Both $D_2$ and $\Delta$ are positive, since they are principal minors of the
+positive definite matrix $\mathcal A$.
+Finally, put
+\begin{equation}\label{eq:functions}
+\begin{aligned}
+ N(x)&=\Delta e_2^{\mathsf T}\mathcal A^{-1}\widehat b(x),\\
+ P(x)&=a_0x+m_1x^2+m_1h(x)-a_0h_1(x),\\
+ Z(x)&=\gamma x^2+(\gamma+a_0)h(x).
+\end{aligned}
+\end{equation}
+
+\begin{lemma}\label{lem:kernel}
+The functions in~\eqref{eq:functions} satisfy $N(x)\ge1$, $P(x)\ge0$, and
+$Z(x)\ge0$ for $x\ge0$, and
+\begin{equation}\label{eq:factor}
+ U(x)^{\mathsf T}\mathcal K U(y)
+ =\frac{N(x)N(y)}{\Delta D_2}
+  +\frac{2P(x)P(y)}{a_0D_2}
+  +\frac{Z(x)Z(y)}{\gamma a_0(\gamma+a_0)}
+ \qquad(x,y\ge0).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Since $\mathcal A^{-1}V=e_0$, the Sherman--Morrison identity gives
+\[
+ \mathcal K=\mathcal A^{-1}-\frac{e_0e_0^{\mathsf T}}{\gamma+a_0}.
+\]
+For clarity, completing squares in the order $2,1,0$ yields, for arbitrary
+$z,w\in\R^3$,
+\begin{equation}\label{eq:bilinear}
+\begin{aligned}
+ z^{\mathsf T}\mathcal K w
+ ={}&\frac{(\Delta e_2^{\mathsf T}\mathcal A^{-1}z)
+              (\Delta e_2^{\mathsf T}\mathcal A^{-1}w)}{\Delta D_2}\\
+ &+\frac{(a_0z_1+\sqrt2m_1z_0)(a_0w_1+\sqrt2m_1w_0)}{a_0D_2}
+  +\frac{\gamma z_0w_0}{a_0(\gamma+a_0)}.
+\end{aligned}
+\end{equation}
+Here the first pivot is $\mathcal K_{22}=D_2/\Delta$.
+After eliminating coordinate $2$, the remaining block is
+$((\mathcal K^{-1})_{\{0,1\},\{0,1\}})^{-1}$; its $(1,1)$ entry is
+$a_0/D_2$, and the ratio of its $(1,0)$ and $(1,1)$ entries is
+$\sqrt2m_1/a_0$. The last pivot is
+$1/(\mathcal K^{-1})_{00}=\gamma/[a_0(\gamma+a_0)]$.
+These identities verify~\eqref{eq:bilinear}.
+Substitute $z=U(x)$ and $w=U(y)$, and use
+\[
+ \Delta e_2^{\mathsf T}\mathcal A^{-1}U(x)=N(x),\qquad
+ a_0U_1(x)+\sqrt2m_1U_0(x)=\sqrt2P(x),\qquad U_0(x)=Z(x)/\gamma.
+\]
+This proves~\eqref{eq:factor}.
+
+Clearly $Z(x)\ge0$. Expanding $P$ gives
+\[
+\begin{aligned}
+ P(x)={}&a_0x+\sum_iq_it_i\bigl[x^2-(x-t_i)_+^2\bigr]\\
+ &+\sum_{i<j}q_iq_j(t_j-t_i)
+       \bigl[(x-t_i)_+^2-(x-t_j)_+^2\bigr].
+\end{aligned}
+\]
+Each summand is nonnegative, so $P(x)\ge0$.
+
+It remains to prove $N(x)\ge1$.
+Let $D(x)$ be the matrix with columns $e_0,e_1,b(x)$, and put
+$c_i(x)=(1,-\sqrt2t_i,a_i(x))^{\mathsf T}$.
+Cramer's rule gives
+\[
+ N(x)=\det[\mathcal A e_0,\mathcal A e_1,\widehat b(x)]
+     =\det\left(D(x)+\sum_iq_iv(t_i)c_i(x)^{\mathsf T}\right).
+\]
+Since $\det D(x)=1$, Sylvester's determinant identity implies
+\begin{equation}\label{eq:Ndet}
+ N(x)=\det(I_k+QW(x)),\qquad
+ Q=\diag(q_1,\ldots,q_k),\qquad
+ W(x)_{ij}=c_i(x)^{\mathsf T}D(x)^{-1}v(t_j).
+\end{equation}
+Direct multiplication gives
+\begin{equation}\label{eq:W}
+ W(x)_{ij}=1+2t_it_j+f_x(t_i)t_j^2,\qquad
+ f_x(t)=t^2-(t-x)_+^2.
+\end{equation}
+On $[0,\infty)$, the function $f_x$ is nonnegative and convex, with
+$f_x(0)=0$: explicitly, it equals $t^2$ for $t\le x$ and $2xt-x^2$ for
+$t\ge x$, and its derivative is $2\min\{t,x\}$.
+By Lemma~\ref{lem:convex}, the matrices with rows
+$(1,t_i,f_x(t_i))$ and $(1,2t_i,t_i^2)$ are totally nonnegative.
+Equation~\eqref{eq:W} expresses $W(x)$ as the product of the first matrix
+and the transpose of the second. The Cauchy--Binet formula therefore shows
+that every minor of $W(x)$ is nonnegative.
+Expanding~\eqref{eq:Ndet} in principal minors now gives
+\[
+ N(x)=\sum_{S\subseteq\{1,\ldots,k\}}
+       \left(\prod_{i\in S}q_i\right)\det W(x)[S,S]\ge1,
+\]
+where the empty minor is defined to be $1$.
+This completes the proof.
+\end{proof}
+
+In particular, for any finite set of nonnegative arguments, the matrix with
+entries $U(x)^{\mathsf T}\mathcal K U(y)$ is completely positive with at most
+three nonnegative columns. We will use this consequence of
+Lemma~\ref{lem:kernel} below.
+
+\section{A completely positive matrix from a planar Gram representation}
+\label{sec:matrix}
+
+The map in~\eqref{eq:matrix} is continuous, and direct inspection gives
+\begin{equation}\label{eq:mass}
+ \M(X)_{ij}=(X_{ij})_+^2\quad(i\ne j),\qquad
+ \M(X)\mathbf1=X^{\circ2}\mathbf1,\qquad
+ \ip{J}{\M(X)}=\fro{X}^2.
+\end{equation}
+We first work with a normalized configuration and later pass to limits.
+Consider
+\begin{equation}\label{eq:coordinates}
+ z_0=(1,0),\qquad z_i=\sqrt{s_i}(-1,t_i)\ (1\le i\le k),\qquad
+ y_j=\sqrt{\rho_j}(x_j,1)\ (1\le j\le p),
+\end{equation}
+where $k\ge1$, $s_i,\rho_j>0$, $0<t_1\le\cdots\le t_k$, and $x_j\ge0$.
+Let $X$ be their Gram matrix and write $M=\M(X)$.
+Use $E=\{0,1,\ldots,k\}$ for the $z$-indices and
+$T=\{\bar1,\ldots,\bar p\}$ for the $y$-indices.
+Set
+\[
+ a_i(x)=(x-t_i)_+^2,\qquad H_i=\sum_j\rho_j a_i(x_j),\qquad
+ d_i=1+H_i,\qquad \sigma=\sum_i s_i.
+\]
+The entries needed for elimination are
+\begin{equation}\label{eq:blocks}
+\begin{aligned}
+ M_{00}&=1+\sigma,& M_{0i}&=0,& M_{0\bar j}&=\rho_jx_j^2,\\
+ M_{ih}&=s_is_h(1+t_it_h)^2+\delta_{ih}s_id_i,
+ &&1\le i,h\le k,\\
+ M_{i\bar j}&=s_i\rho_j(t_i-x_j)_+^2,
+ &&1\le i\le k,\ 1\le j\le p.
+\end{aligned}
+\end{equation}
+Here $\delta_{ih}$ is $1$ when $i=h$ and $0$ otherwise.
+
+\begin{lemma}\label{lem:elimination}
+For the configuration~\eqref{eq:coordinates}, there is a completely positive
+matrix $C_0$ such that
+\begin{equation}\label{eq:extraction}
+ M=C_0+\widetilde R,\qquad
+ R=M_{TT}-M_{TE}M_{EE}^{-1}M_{ET}\succeq0,
+\end{equation}
+where a tilde denotes extension by zero outside the rows and columns in $T$.
+\end{lemma}
+\begin{proof}
+We eliminate the indices $0,1,\ldots,k$ in that order by symmetric Gaussian
+elimination. The pivot at $0$ is positive and its column is nonnegative.
+By~\eqref{eq:blocks}, this step changes neither the block on $\{1,\ldots,k\}$
+nor its coupling to $T$.
+The former block is the sum of a Gram matrix and the positive diagonal matrix
+$\diag(s_1d_1,\ldots,s_kd_k)$, so all subsequent pivots are positive.
+
+It suffices to show that each of the remaining elimination columns is
+nonnegative. At pivot $j$, let $I=(1,\ldots,j-1)$ and let $\alpha$ be a
+later index. The residual entry in row $\alpha$ and column $j$ is
+\[
+ \frac{\det M[I,\alpha;I,j]}{\det M[I,I]}.
+\]
+The notation in the numerator specifies the ordered row list $(I,\alpha)$
+and column list $(I,j)$; for $I$ empty the denominator is $1$.
+These entries involve only the unchanged block and its couplings.
+Expand the numerator in the positive diagonal terms indexed by $I$.
+Deleting the same row and column positions contributes positive cofactor sign.
+After removing the positive row and column factors $s_i$ and $\rho_j$,
+every resulting term is a minor whose ordinary rows have entries
+$(1+t_at_b)^2$. There may also be a last row with entries $(t_b-x)_+^2$,
+where $x\ge0$.
+
+For $s,t>0$,
+\[
+ (1+st)^2=s^2\bigl(t-(-1/s)\bigr)_+^2.
+\]
+Thus these are, up to positive row factors, ordered minors of the kernel in
+Lemma~\ref{lem:truncated}. The row arguments $-1/t_a$ increase with $t_a$.
+A later $z$-index preserves this order, and a last argument $x\ge0$ follows
+all the negative row arguments. The column arguments are also increasing.
+All the terms are therefore nonnegative.
+
+Dividing each elimination column by the square root of its positive pivot
+produces a nonnegative vector. The sum of their outer products is a completely
+positive matrix $C_0$. The remaining block is the Schur complement in
+\eqref{eq:extraction}, which is positive semidefinite because $M\succeq0$.
+\end{proof}
+
+We now identify the remaining block. Put
+\begin{equation}\label{eq:qgamma}
+ q_i=\frac{s_i}{d_i},\qquad
+ \gamma=\sigma-\sum_iq_i=\sum_i\frac{s_iH_i}{1+H_i}.
+\end{equation}
+For the moment assume $\gamma>0$.
+Use the notation of Section~\ref{sec:kernel} with these $q_i$ and $\gamma$.
+Let $F$ have rows $e_0^{\mathsf T}$ at index $0$,
+$s_iv(t_i)^{\mathsf T}$ at index $i$, and
+$\rho_jb(x_j)^{\mathsf T}$ at index $\bar j$.
+These are the degree-two Gram features, so
+\begin{equation}\label{eq:features}
+ M=FF^{\mathsf T}+L,
+\end{equation}
+where $L$ is the Laplacian of the pairs with negative original inner product.
+Its only possibly nonzero edge weights are $s_i$ on $0i$ and
+$s_i\rho_j a_i(x_j)$ on $i\bar j$.
+Writing $s=(s_1,\ldots,s_k)^{\mathsf T}$, we have
+\[
+ L_{EE}=\begin{pmatrix}
+ \sigma&-s^{\mathsf T}\\
+ -s&\diag(s_1d_1,\ldots,s_kd_k)
+ \end{pmatrix}\succ0.
+\]
+The Schur complement of the lower-right block is $\gamma$, and
+\begin{equation}\label{eq:Linverse}
+ L_{EE}^{-1}=\diag\left(0,\frac1{s_1d_1},\ldots,\frac1{s_kd_k}\right)
+             +\frac1\gamma ww^{\mathsf T},\qquad
+ w=(1,d_1^{-1},\ldots,d_k^{-1})^{\mathsf T}.
+\end{equation}
+
+Define
+\[
+ L_{\rm red}=L_{TT}-L_{TE}L_{EE}^{-1}L_{ET},\qquad
+ \mathcal U=F_T-L_{TE}L_{EE}^{-1}F_E.
+\]
+A block elimination in~\eqref{eq:features}, followed by the Woodbury identity,
+gives
+\begin{equation}\label{eq:Schur}
+ R=L_{\rm red}+\mathcal U
+       (I_3+F_E^{\mathsf T}L_{EE}^{-1}F_E)^{-1}\mathcal U^{\mathsf T}.
+\end{equation}
+Indeed, the block elimination that replaces $L$ by
+$\diag(L_{EE},L_{\rm red})$ replaces the feature rows by $(F_E,\mathcal U)$.
+The Schur complement of the first block is then
+\[
+ L_{\rm red}+\mathcal U
+ \bigl[I_3-F_E^{\mathsf T}(L_{EE}+F_EF_E^{\mathsf T})^{-1}F_E\bigr]
+ \mathcal U^{\mathsf T},
+\]
+and the bracket equals the inverse appearing in~\eqref{eq:Schur}.
+
+By~\eqref{eq:Linverse}, the center row of $L_{EE}^{-1}F_E$ is
+$V^{\mathsf T}/\gamma$, and its $i$th row is
+$(v(t_i)+V/\gamma)^{\mathsf T}/d_i$. Hence
+\[
+ I_3+F_E^{\mathsf T}L_{EE}^{-1}F_E
+ =\mathcal A+VV^{\mathsf T}/\gamma,\qquad
+ \mathcal U_{\bar j}=\rho_jU(x_j)^{\mathsf T}.
+\]
+The second term on the right of~\eqref{eq:Schur} therefore has entries
+$\rho_j\rho_\ell U(x_j)^{\mathsf T}\mathcal K U(x_\ell)$.
+It is completely positive by Lemma~\ref{lem:kernel}; denote it by $C_1$.
+
+The matrix $L_{\rm red}$ is a weighted graph Laplacian. This is the usual
+Schur-complement property called Kron reduction; see~\cite{DB}.
+In this instance it also follows directly from
+\[
+ -(L_{\rm red})_{\bar j\bar\ell}
+ =\rho_j\rho_\ell\left[
+   \sum_iq_i a_i(x_j)a_i(x_\ell)+\frac{h(x_j)h(x_\ell)}\gamma
+   \right]\ge0\qquad(j\ne\ell)
+\]
+and $L_{\rm red}\mathbf1=0$.
+The latter identity follows from $L\mathbf1=0$ by solving its $E$-rows for
+the vector on $E$ and substituting into its $T$-rows.
+Combining Lemma~\ref{lem:elimination} with~\eqref{eq:Schur}, we obtain
+\[
+ M=C_0+\widetilde C_1+\widetilde L_{\rm red}.
+\]
+The first two terms are completely positive, and $M\ge0$ entrywise.
+Corollary~\ref{cor:laplacian} proves that $M$ is completely positive.
+Notice that we do not need the Schur complement $R$ itself to be entrywise
+nonnegative.
+
+The case $\gamma=0$ in~\eqref{eq:qgamma} follows by adjoining one small vector.
+Choose $x_*>\max_i t_i$ and add
+$y_*=\sqrt\varepsilon(x_*,1)$, where $\varepsilon>0$.
+Every $H_i$ in the enlarged configuration is then positive, so the preceding
+argument applies. The principal submatrix of its completely positive matrix
+on the original indices converges to $M$ as $\varepsilon\downarrow0$.
+Indeed, the new vector changes the old entries only by diagonal contributions
+of order $\varepsilon$ in~\eqref{eq:matrix}.
+Closedness of the completely positive cone proves the assertion for the
+original configuration. This argument also covers $p=0$.
+
+We can now prove Theorem~\ref{thm:matrix}.
+\begin{proof}
+First suppose that all nonzero Gram vectors lie in a common open half-plane,
+and remove zero vectors. If no pair has negative inner product, their angular
+span is at most $\pi/2$. After a rotation they have nonnegative coordinates,
+so $X=pp^{\mathsf T}+qq^{\mathsf T}$ with $p,q\ge0$. Therefore
+\[
+ \M(X)=X^{\circ2}
+ =p^{\circ2}(p^{\circ2})^{\mathsf T}
+  +q^{\circ2}(q^{\circ2})^{\mathsf T}
+  +2(p\circ q)(p\circ q)^{\mathsf T}
+\]
+is completely positive.
+
+Otherwise, first assume the minimum angular direction is unique.
+Rotate and multiply all vectors by a common positive scalar to make that
+vector $(1,0)$. All other angles lie in $(0,\pi)$.
+Separating the vectors by the sign of their first coordinate gives
+\eqref{eq:coordinates}, with $k\ge1$, after ordering the parameters $t_i$.
+The result just proved applies. The common rescaling causes no difficulty,
+since replacing $X$ by $c^2X$ replaces $\M(X)$ by $c^4\M(X)$.
+Tied minimum directions are handled by a perturbation within the open
+half-plane and closedness of $\CP_n$.
+
+Finally, let $w$ be a unit vector defining the closed half-plane in the
+statement. Replacing each $z_i$ by $z_i+\varepsilon w$ puts every vector in
+the corresponding open half-plane. Their Gram matrices converge to $X$.
+Continuity of~\eqref{eq:matrix} and closedness of $\CP_n$ give the result.
+\end{proof}
+
+\section{Spectral inequalities and rank-two optimization}\label{sec:spectral}
+
+The completely positive form of Motzkin--Straus is
+\begin{equation}\label{eq:CPMS}
+ \ip{A_G}{C}\le\left(1-\frac1{\omega(G)}\right)\ip{J}{C}
+ \qquad(C\in\CP_n).
+\end{equation}
+It follows by applying~\eqref{eq:MS} to every column in a nonnegative
+factorization of $C$ and adding. This formulation is classical in copositive
+optimization; see de Klerk and Pasechnik~\cite{dKP} and~\cite{CSZ}.
+
+We first prove Theorem~\ref{thm:weighted}.
+\begin{proof}
+The case $B=0$ is immediate. Otherwise set $r=\omega(G)\ge2$, and let
+$a>0$ be the largest eigenvalue of $B$. Take a unit nonnegative Perron
+eigenvector $u$. If $B$ has a second positive eigenvalue $b$, choose a unit
+eigenvector $v$ orthogonal to $u$ and put
+$X=auu^{\mathsf T}+bvv^{\mathsf T}$.
+If there is no second positive eigenvalue, put $X=auu^{\mathsf T}$.
+In either case,
+\[
+ \ip{B}{X}=\fro{X}^2=\F(B)=:S>0.
+\]
+The planar Gram vectors of $X$ can be taken to be
+$(\sqrt a\,u_i,\sqrt b\,v_i)$, with second coordinate zero when the second
+term is absent. They lie in the closed right half-plane, even when $B$ is
+reducible. By Theorem~\ref{thm:matrix}, $\M(X)$ is completely positive.
+Equations~\eqref{eq:mass} and~\eqref{eq:CPMS} give
+\[
+ \sum_{i,j}(A_G)_{ij}(X_{ij})_+^2\le(1-1/r)S.
+\]
+Using the support and nonnegativity of $B$, followed by Cauchy--Schwarz,
+we obtain
+\[
+ S=\ip{B}{X}\le\ip{B}{A_G\circ X_+}
+ \le\fro{B}\left(\sum_{i,j}(A_G)_{ij}(X_{ij})_+^2\right)^{1/2}
+ \le\fro{B}\sqrt{(1-1/r)S}.
+\]
+Squaring and dividing by $S$ proves the theorem.
+\end{proof}
+
+For sharpness in~\eqref{eq:weighted}, take the adjacency matrix of a maximum
+clique of size $r\ge2$ and extend it by zeros. Its only positive eigenvalue is
+$r-1$, and its squared Frobenius norm is $r(r-1)$.
+
+To obtain Conjecture~\ref{conj:BN}, observe that a nonedge gives a zero
+$2\times2$ principal submatrix of $A_G$.
+Eigenvalue interlacing yields $\lambda_2(G)\ge0$.
+Thus $\F(A_G)=\lambda_1(G)^2+\lambda_2(G)^2$, while
+$\fro{A_G}^2=2|E(G)|$. Theorem~\ref{thm:weighted} proves the conjecture;
+edgeless graphs are included.
+
+The following elementary variational inequality will allow arbitrary planar
+Gram vectors.
+
+\begin{lemma}\label{lem:variational}
+If $B$ is real symmetric and $X\succeq0$ has rank at most two, then
+\[
+ \ip{B}{X}\le\sqrt{\F(B)}\,\fro{X}.
+\]
+\end{lemma}
+\begin{proof}
+The case of matrices of order one follows directly, so assume the order is
+at least two. Write
+$X=\alpha uu^{\mathsf T}+\beta vv^{\mathsf T}$, where $u,v$ are orthonormal
+and $\alpha\ge\beta\ge0$, allowing a zero coefficient.
+If $\mu_1\ge\mu_2$ are the two largest eigenvalues of $B$, the Rayleigh
+principle and the two-dimensional variational principle give
+\[
+ \ip{B}{X}
+ =(\alpha-\beta)u^{\mathsf T}Bu+
+   \beta(u^{\mathsf T}Bu+v^{\mathsf T}Bv)
+ \le\alpha\mu_1+\beta\mu_2.
+\]
+For completeness, the second variational principle follows by expanding the
+orthogonal projection $uu^{\mathsf T}+vv^{\mathsf T}$ in an eigenbasis of $B$:
+its diagonal entries lie in $[0,1]$ and sum to $2$.
+Replacing $\mu_1,\mu_2$ by their positive parts and applying Cauchy--Schwarz
+proves the assertion.
+\end{proof}
+
+We now prove Theorem~\ref{thm:gram}.
+\begin{proof}
+Set $B=A_G\circ X_+$ and $T=\fro{B}^2$.
+Then $B$ satisfies the hypotheses of Theorem~\ref{thm:weighted}, and
+$\ip{B}{X}=T$.
+If $T=0$, the assertion is immediate. Otherwise, Theorem~\ref{thm:weighted}
+and Lemma~\ref{lem:variational} give
+\[
+ T\le\sqrt{\F(B)}\,\fro{X}
+ \le\sqrt{\left(1-\frac1{\omega(G)}\right)T}\,\fro{X}.
+\]
+Squaring and dividing by $T$ proves~\eqref{eq:gram}.
+\end{proof}
+
+\subsection{The rank-two optimization problem}\label{subsec:conic}
+
+Let $\overline G$ be the complement of $G$, so
+$A_{\overline G}=J-I-A_G$.
+Following~\cite{CSZ}, define
+\begin{equation}\label{eq:parameter}
+ \chi''_{\mathrm{vec},3}(G)=
+ \max\left\{\ip{J}{X^{\circ2}}:
+ \begin{array}{l}
+ X\succeq0,\quad\rank X\le2,\\
+ \ip{I+A_{\overline G}}{X^{\circ2}}=1,\\
+ X_{ij}\ge0\quad\text{for }\{i,j\}\in E(G)
+ \end{array}\right\}.
+\end{equation}
+This maximum is well defined. The feasible set is nonempty, and the
+normalization implies $\sum_iX_{ii}^2\le1$.
+Positive semidefiniteness then bounds every entry by
+$|X_{ij}|^2\le X_{ii}X_{jj}\le1$. All constraints are closed, so the
+feasible set is compact.
+
+Conjecture 2 of Coutinho, Spier, and Zhang~\cite{CSZ} is the following.
+\begin{conjecture}\label{conj:CSZ}
+There is an integer $r_0$ such that
+$\chi''_{\mathrm{vec},3}(G)=\omega(G)$ whenever $\omega(G)\ge r_0$.
+\end{conjecture}
+
+Theorem~\ref{thm:gram} proves a stronger statement.
+\begin{corollary}\label{cor:parameter}
+Every graph $G$ satisfies $\chi''_{\mathrm{vec},3}(G)=\omega(G)$.
+\end{corollary}
+\begin{proof}
+Let $r=\omega(G)$ and let $X$ be feasible in~\eqref{eq:parameter}.
+Since $X$ is nonnegative on edges, Theorem~\ref{thm:gram} gives
+\[
+ \ip{A_G}{X^{\circ2}}\le(1-1/r)\fro{X}^2.
+\]
+The normalization therefore implies
+\[
+ 1=\fro{X}^2-\ip{A_G}{X^{\circ2}}\ge\frac1r\fro{X}^2,
+\]
+so the objective is at most $r$.
+For the reverse inequality, let $q$ be the indicator vector of a clique of
+size $r$, and take $X=qq^{\mathsf T}/\sqrt r$.
+This matrix is feasible and has objective value $r$.
+\end{proof}
+
+This proves Conjecture~\ref{conj:CSZ} without a lower bound on the clique
+number. The equivalent planar-vector formulation, Conjecture 3 in~\cite{CSZ},
+follows by writing $X_{ij}=z_i^{\mathsf T}z_j$ in~\eqref{eq:gram}.
+More explicitly, for arbitrary $z_1,\ldots,z_n\in\R^2$ we have
+\[
+ \sum_{\{i,j\}\in E(G)}(z_i^{\mathsf T}z_j)_+^2
+ \le\frac12\left(1-\frac1{\omega(G)}\right)
+             \sum_{i,j=1}^n(z_i^{\mathsf T}z_j)^2.
+\]
+When inner products on edges are nonnegative, the positive parts can be
+omitted. No common half-plane assumption is needed for this scalar inequality.
+Corollary~\ref{cor:parameter} concerns this rank-two problem; it does not assert
+complete positivity of~\eqref{eq:matrix} for arbitrary planar configurations.
+
+\begin{thebibliography}{99}
+
+\bibitem{AL}
+T.~Ando and M.~Lin,
+Proof of a conjectured lower bound on the chromatic number of a graph,
+\emph{Linear Algebra Appl.} \textbf{485} (2015), 480--484.
+
+\bibitem{BN}
+B.~Bollob\'as and V.~Nikiforov,
+Cliques and the spectral radius,
+\emph{J. Combin. Theory Ser. B} \textbf{97} (2007), 859--865.
+
+\bibitem{CSZ}
+G.~Coutinho, T.~J.~Spier, and S.~Zhang,
+Conic programming to understand sums of squares of eigenvalues of graphs,
+arXiv:2411.08184 (2024).
+
+\bibitem{dKP}
+E.~de Klerk and D.~V.~Pasechnik,
+Approximation of the stability number of a graph via copositive programming,
+\emph{SIAM J. Optim.} \textbf{12} (2002), 875--892.
+
+\bibitem{DB}
+F.~D\"orfler and F.~Bullo,
+Kron reduction of graphs with applications to electrical networks,
+\emph{IEEE Trans. Circuits Syst. I Regul. Pap.} \textbf{60} (2013), 150--163.
+
+\bibitem{ELW}
+C.~Elphick, W.~Linz, and P.~Wocjan,
+Two conjectured strengthenings of Tur\'an's theorem,
+\emph{Linear Algebra Appl.} \textbf{684} (2024), 23--36.
+
+\bibitem{FJ}
+S.~M.~Fallat and C.~R.~Johnson,
+\emph{Totally Nonnegative Matrices},
+Princeton University Press, Princeton, NJ, 2011.
+
+\bibitem{KP}
+H.~Kumar and S.~Pragada,
+Bollob\'as--Nikiforov conjecture for graphs with not so many triangles,
+\emph{Linear Algebra Appl.} \textbf{727} (2025), 1--9.
+
+\bibitem{LNW}
+H.~Lin, B.~Ning, and B.~Wu,
+Eigenvalues and triangles in graphs,
+\emph{Combin. Probab. Comput.} \textbf{30} (2021), 258--270.
+
+\bibitem{LB}
+C.~Liu and C.~Bu,
+Bollob\'as--Nikiforov conjecture holds asymptotically almost surely,
+arXiv:2501.07137 (2025).
+
+\bibitem{LN}
+L.~Liu and B.~Ning,
+Unsolved problems in spectral graph theory,
+\emph{Oper. Res. Trans.} \textbf{27} (2023), no.~4, 33--60.
+
+\bibitem{MS}
+T.~S.~Motzkin and E.~G.~Straus,
+Maxima for graphs and a new proof of a theorem of Tur\'an,
+\emph{Canad. J. Math.} \textbf{17} (1965), 533--540.
+
+\bibitem{Nikiforov}
+V.~Nikiforov,
+Some inequalities for the largest eigenvalue of a graph,
+\emph{Combin. Probab. Comput.} \textbf{11} (2002), 179--189.
+
+\bibitem{SMB}
+N.~Shaked-Monderer and A.~Berman,
+\emph{Copositive and Completely Positive Matrices},
+World Scientific, Singapore, 2021.
+
+\bibitem{Wilf}
+H.~S.~Wilf,
+Spectral bounds for the clique and independence numbers of graphs,
+\emph{J. Combin. Theory Ser. B} \textbf{40} (1986), 113--117.
+
+\bibitem{ZZ}
+J.~Zeng and X.-D.~Zhang,
+A note on the Bollob\'as--Nikiforov conjecture,
+\emph{Linear Algebra Appl.} \textbf{710} (2025), 230--242.
+
+\bibitem{Zhang}
+S.~Zhang,
+On the first two eigenvalues of regular graphs,
+\emph{Linear Algebra Appl.} \textbf{686} (2024), 102--110.
+
+\end{thebibliography}
+\end{document}

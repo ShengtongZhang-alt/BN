@@ -1,0 +1,73 @@
+name: Palomar checks
+
+# Mirrors the checks Palomar runs at submission time (see
+# https://palomar-registry.org/how-to-submit): the metadata file parses, satisfies
+# the upstream formalization.yaml v0.4 JSON schema and Palomar's mechanical rules,
+# agrees with comparator.json and the licence, the Challenge module imports only
+# Mathlib, the pinned Comparator toolchain confirms that the proved declarations in
+# `Solution` match the statements in `Challenge` using only the standard axioms,
+# and the axiom lists recorded in the metadata agree with `#print axioms`.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  metadata:
+    name: Check formalization.yaml, comparator.json, licence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b
+        with:
+          ruby-version: "3.3.12"
+      - name: Validate the submission files
+        run: ruby scripts/check-submission-files.rb
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Validate formalization.yaml against the upstream v0.4 JSON schema
+        run: |
+          pip install --quiet check-jsonschema==0.38.0
+          ./scripts/check-metadata-schema.sh
+      - name: Detect the repository licence
+        run: |
+          gem install licensee --version 10.0.0 --no-document
+          licensee detect LICENSE --json --no-packages --no-readme > "$RUNNER_TEMP/license.json"
+          ruby -rjson -e '
+            report = JSON.parse(File.read(ARGV.fetch(0)))
+            identifiers = report.fetch("licenses").map { |item| item.fetch("spdx_id") }
+            abort "LICENSE is not detected exactly as Apache-2.0" unless identifiers == ["Apache-2.0"]
+          ' "$RUNNER_TEMP/license.json"
+
+  comparator:
+    name: Check statement against solution
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          build: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: "1.24.0"
+          cache: false
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b
+        with:
+          ruby-version: "3.3.12"
+      - name: Run pinned Comparator toolchain and the axiom cross-check
+        run: ./scripts/verify-comparator.sh

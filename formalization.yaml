@@ -1,0 +1,341 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4 (mathlib-initiative format) with the Palomar registry additions
+# (responsible maintainers, classification, sources with relationships).
+version: "v0.4"
+
+project:
+  name: "The Bollobás–Nikiforov inequality for nonnegative edge weights"
+  description: >-
+    A complete Lean 4 / Mathlib formalization of the Bollobás–Nikiforov
+    conjecture (2007) and of the matrix theorems that prove it. Let G be a
+    finite simple graph with adjacency eigenvalues lambda_1 >= lambda_2 >= ...,
+    m edges and clique number omega(G). The conjecture states that every
+    noncomplete graph on at least two vertices satisfies
+    lambda_1^2 + lambda_2^2 <= 2 (1 - 1/omega(G)) m. The formalization proves
+    it (BN.lambda1_sq_add_lambda2_sq_le) as a consequence of a weighted
+    spectral inequality: for every symmetric entrywise nonnegative matrix B
+    with zero diagonal supported on the edges of G, the sum F(B) of the squares
+    of the two largest positive eigenvalues of B is at most
+    (1 - 1/omega(G)) ||B||_F^2 (BN.weighted). The weighted inequality rests on
+    a complete-positivity theorem for planar Gram matrices: if
+    z_1, ..., z_n in R^2 lie in a closed half-plane through the origin and X is
+    their Gram matrix, then M(X) = X o X + sum over i < j with X_ij < 0 of
+    X_ij^2 (e_i - e_j)(e_i - e_j)^T is completely positive (BN.matrix_theorem),
+    proved by an ordered elimination, a Schur complement identified as a
+    weighted Laplacian plus a matrix with an explicit three-column nonnegative
+    factorization, and total nonnegativity of two rectangular kernels. A
+    variational argument then removes the half-plane hypothesis from the
+    scalar inequality: for every real positive semidefinite X of rank at most
+    two, sum_{i,j} (A_G)_ij (X_ij)_+^2 <= (1 - 1/omega(G)) ||X||_F^2
+    (BN.gram_le), which also identifies the rank-two conic parameter
+    chi''_{vec,3}(G) of Coutinho, Spier and Zhang with omega(G)
+    (BN.chiVec3_eq_cliqueNum), settling their Conjectures 2 and 3 without a
+    lower bound on the clique number. Previously the conjecture was known for
+    weakly perfect graphs (Ando–Lin), triangle-free graphs (Lin–Ning–Wu),
+    regular graphs (Zhang), graphs with few triangles (Kumar–Pragada,
+    Zeng–Zhang), asymptotically almost surely for random graphs (Liu–Bu), and
+    with weaker constants for all graphs (Coutinho–Spier–Zhang). All five
+    headline theorems are proved with no sorry and depend only on propext,
+    Classical.choice and Quot.sound.
+  authors:
+    - "Shengtong Zhang"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Shengtong Zhang"
+
+# `repository` is omitted: this repository is the substantive proof development,
+# not a thin Comparator wrapper.
+
+classification:
+  arxiv: [math.CO]
+  msc2020: ["05C50", "05C35", "15B48", "15A18"]
+
+sources:
+  - title: "The Bollobás–Nikiforov inequality for nonnegative edge weights"
+    authors:
+      - "Shengtong Zhang"
+    id: "docs/sol.tex (this repository, at the submitted commit)"
+    type: paper
+    location: "https://github.com/ShengtongZhang-alt/BN/blob/main/docs/sol.tex"
+    relationship: formalizes
+    note: >-
+      Unpublished research note dated September 2026, included in the
+      repository as docs/sol.tex. The formalization proves Conjecture 1.1
+      (label conj:BN), Theorem 1.2 (thm:weighted), Theorem 1.3 (thm:matrix),
+      Theorem 1.4 (thm:gram) and Corollary 5.3 (cor:parameter), together with
+      the supporting lemmas of Sections 2–5 (the pair lemma and weighted
+      Laplacian corollary for completely positive matrices, closedness of the
+      completely positive cone, total nonnegativity of the truncated-square
+      and convex kernels via Cauchy–Binet, the three-column factorization, the
+      ordered elimination and Schur complement, the Perron eigenvector step,
+      Cauchy interlacing, and the Motzkin–Straus inequality in its completely
+      positive form). The statement-level decomposition used by the agents is
+      docs/formalization_dag.md.
+    license: unknown
+    author_endorsement: participated
+  - title: "Cliques and the spectral radius"
+    authors: ["Béla Bollobás", "Vladimir Nikiforov"]
+    id: "doi:10.1016/j.jctb.2006.12.002"
+    type: paper
+    location: "https://doi.org/10.1016/j.jctb.2006.12.002"
+    relationship: background
+    note: >-
+      J. Combin. Theory Ser. B 97 (2007), 859–865. States the conjecture
+      lambda_1^2 + lambda_2^2 <= 2 (1 - 1/omega(G)) m for noncomplete graphs,
+      which is BN.lambda1_sq_add_lambda2_sq_le.
+  - title: "Conic programming to understand sums of squares of eigenvalues of graphs"
+    authors: ["Gabriel Coutinho", "Thomás Jung Spier", "Shengtong Zhang"]
+    id: "arXiv:2411.08184"
+    type: paper
+    location: "https://arxiv.org/abs/2411.08184"
+    relationship: background
+    note: >-
+      Introduces the rank-two program chi''_{vec,3}(G) (their (8)) and proves
+      the Bollobás–Nikiforov inequality with weaker constants. Their
+      Conjecture 2 (chi''_{vec,3}(G) = omega(G) for omega(G) large) and the
+      equivalent planar-vector Conjecture 3 are settled in full by
+      BN.chiVec3_eq_cliqueNum and BN.gram_le. The definitions
+      BN.ChiVec3Feasible and BN.chiVec3 follow their program (8).
+  - title: "Maxima for graphs and a new proof of a theorem of Turán"
+    authors: ["Theodore S. Motzkin", "Ernst G. Straus"]
+    id: "doi:10.4153/CJM-1965-053-6"
+    type: paper
+    location: "https://doi.org/10.4153/CJM-1965-053-6"
+    relationship: background
+    note: >-
+      Canad. J. Math. 17 (1965), 533–540. The Motzkin–Straus inequality
+      y^T A_G y <= (1 - 1/omega(G)) (1^T y)^2 for y >= 0, used in its
+      completely positive form (BN/MS/Basic.lean).
+  - title: "Some inequalities for the largest eigenvalue of a graph"
+    authors: ["Vladimir Nikiforov"]
+    id: "doi:10.1017/S0963548301004928"
+    type: paper
+    location: "https://doi.org/10.1017/S0963548301004928"
+    relationship: background
+    note: >-
+      Combin. Probab. Comput. 11 (2002), 179–189. The one-eigenvalue bound
+      lambda_1^2 <= 2 (1 - 1/omega(G)) m that the conjecture strengthens.
+  - title: "Proof of a conjectured lower bound on the chromatic number of a graph"
+    authors: ["Tsuyoshi Ando", "Minghua Lin"]
+    id: "doi:10.1016/j.laa.2015.08.007"
+    type: paper
+    location: "https://doi.org/10.1016/j.laa.2015.08.007"
+    relationship: background
+    note: >-
+      Linear Algebra Appl. 485 (2015), 480–484. Sum of squares of positive
+      eigenvalues versus the chromatic number; implies the conjecture when
+      chi(G) = omega(G).
+  - title: "Eigenvalues and triangles in graphs"
+    authors: ["Huiqiu Lin", "Bo Ning", "Baoyindureng Wu"]
+    id: "doi:10.1017/S0963548320000462"
+    type: paper
+    location: "https://doi.org/10.1017/S0963548320000462"
+    relationship: background
+    note: >-
+      Combin. Probab. Comput. 30 (2021), 258–270. The triangle-free case of
+      the conjecture, with equality cases.
+  - title: "On the first two eigenvalues of regular graphs"
+    authors: ["Shengtong Zhang"]
+    id: "doi:10.1016/j.laa.2024.01.002"
+    type: paper
+    location: "https://doi.org/10.1016/j.laa.2024.01.002"
+    relationship: background
+    note: "Linear Algebra Appl. 686 (2024), 102–110. The regular case of the conjecture."
+  - title: "Bollobás–Nikiforov conjecture for graphs with not so many triangles"
+    authors: ["Hitesh Kumar", "Shivaramakrishna Pragada"]
+    id: "arXiv:2407.19341"
+    type: paper
+    location: "https://arxiv.org/abs/2407.19341"
+    relationship: background
+    note: "Linear Algebra Appl. 727 (2025), 1–9. The conjecture for graphs with few triangles."
+  - title: "Bollobás–Nikiforov conjecture holds asymptotically almost surely"
+    authors: ["Chunmeng Liu", "Changjiang Bu"]
+    id: "arXiv:2501.07137"
+    type: paper
+    location: "https://arxiv.org/abs/2501.07137"
+    relationship: background
+    note: "The conjecture for random graphs, asymptotically almost surely."
+
+# We are not aware of a previous Lean formalization of the Bollobás–Nikiforov
+# conjecture, of the Motzkin–Straus inequality, or of completely positive /
+# totally nonnegative matrices; left empty deliberately.
+related_formalizations: []
+
+status:
+  scope: >-
+    Fully formalized: (1) the Bollobás–Nikiforov inequality
+    lambda_1(G)^2 + lambda_2(G)^2 <= 2 (1 - 1/omega(G)) |E(G)| for every finite
+    noncomplete simple graph on at least two vertices
+    (BN.lambda1_sq_add_lambda2_sq_le); (2) the weighted spectral inequality
+    F(B) <= (1 - 1/omega(G)) ||B||_F^2 for symmetric entrywise nonnegative B
+    with zero diagonal supported on E(G) (BN.weighted); (3) complete
+    positivity of M(X) for the Gram matrix X of planar vectors in a closed
+    half-plane through the origin (BN.matrix_theorem); (4) the rank-two Gram
+    inequality sum_{i,j} (A_G)_ij (X_ij)_+^2 <= (1 - 1/omega(G)) ||X||_F^2
+    for positive semidefinite X of rank at most two (BN.gram_le); (5) the
+    identity chi''_{vec,3}(G) = omega(G) (BN.chiVec3_eq_cliqueNum). The
+    supporting theory (completely positive cone and its closedness, weighted
+    Laplacian updates, Motzkin–Straus, total nonnegativity of the kernels
+    (t - a)_+^2 and of the convex kernel, the three-column factorization, the
+    ordered elimination, Schur complements, Perron eigenvectors of symmetric
+    nonnegative matrices, Cauchy interlacing) is developed from Mathlib in the
+    BN/ directory. Not formalized: the paper's remarks on sharpness of the
+    constant in thm:weighted, and the explicit planar-vector restatement of
+    Conjecture 3 of Coutinho–Spier–Zhang (which follows from BN.gram_le by
+    writing X_ij = z_i . z_j but is not stated separately). The Lean
+    definition of chi''_{vec,3} uses sSup of the objective over the feasible
+    set rather than a maximum; the theorem shows this supremum equals omega(G).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  # Every axiom appearing in `#print axioms` for the main results (the three
+  # standard Lean/Mathlib axioms and nothing else; checked by
+  # scripts/check-axioms.rb and by Comparator's `permitted_axioms`).
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "BN.lambda1_sq_add_lambda2_sq_le"
+      file: "BN/Main.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+    - declaration: "BN.weighted"
+      file: "BN/Spectral/Weighted.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+    - declaration: "BN.matrix_theorem"
+      file: "BN/M/Main.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+    - declaration: "BN.gram_le"
+      file: "BN/Spectral/Gram.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+    - declaration: "BN.chiVec3_eq_cliqueNum"
+      file: "BN/Spectral/Conic.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: agent
+      models: ["Grok 4.6 (xAI)"]
+      framework: "Cursor"
+      tool_setup: >-
+        AI-generated. Grok 4.6 agents running in the Cursor IDE wrote the
+        entire Lean development under human direction: the statement-level
+        blueprint docs/formalization_dag.md (one lemma or definition per
+        node, grouped into the clusters N, CP, MS, TN, KR, MX, EL, SC, HP, SP,
+        CG), and then every node as a separate Lean module, with progress
+        tracked in docs/PROGRESS.md. Each node was checked by `lake build`
+        and the axiom report before being marked done. Standard Lean/Mathlib
+        tactics were used; no proof-search tools external to Lean and Mathlib.
+        The Palomar submission surface (Challenge.lean, Solution.lean,
+        comparator.json, this file, the scripts/ checks and the CI workflow)
+        was assembled afterwards by a Claude Fable 5.1 agent in Cursor,
+        following the layout of the author's Nikodym repository; it adds no
+        proof content.
+      cost:
+        wall_time: "Approximately one day of elapsed agent time (the development is dated 2026-09-05)."
+        spend_usd: "not tracked"
+        hardware: "Local Apple Silicon Mac for Lean builds; API-hosted models."
+      prompting_notes: >-
+        The human author supplied the source note docs/sol.tex and the target
+        statement BN.lambda1_sq_add_lambda2_sq_le with its definitions in
+        BN/Definition.lean, reviewed the blueprint, and directed the
+        decomposition into nodes. Agents were prompted node by node with the
+        blueprint statement, the mathematical proof from the note, and the
+        interfaces of already completed nodes, and were required to leave the
+        build free of sorry.
+  spend_usd: "not tracked"
+  notes: >-
+    Human-directed, agent-executed workflow. The human author (author of the
+    source note) fixed the Lean statement of the conjecture and the spectral
+    conventions in BN/Definition.lean, approved the blueprint, and audited the
+    statements in Challenge.lean against the note; Grok 4.6 agents produced
+    essentially all of the roughly 15,700 lines of Lean code. Correctness of
+    proofs rests on the Lean kernel; the statements in Challenge.lean are the
+    human-audited surface.
+
+fidelity:
+  divergences: >-
+    None known in the headline statements. Presentation and typeclass
+    differences: (a) eigenvalues are Mathlib's Matrix.IsHermitian.eigenvalues₀
+    of the real adjacency matrix, antitone on Fin n and counted with algebraic
+    multiplicity, so lambda1 and lambda2 are the values at indices 0 and 1;
+    (b) the paper's F(B) (sum of squares of the two largest positive
+    eigenvalues, missing terms replaced by 0) is BN.F, defined as
+    (max lambda_1 0)^2 + (max lambda_2 0)^2 with the second term omitted when
+    n = 1 and F = 0 when n = 0; (c) BN.weighted carries a [Nontrivial n]
+    hypothesis inherited from its ambient section (for a one-vertex graph the
+    only admissible B is 0, so nothing is lost), and BN.matrix_theorem and
+    BN.M carry a [LinearOrder n] hypothesis that fixes the meaning of i < j
+    in the sum defining M, exactly as the paper's indexing 1, ..., n does;
+    (d) the sum in BN.gram_le runs over all ordered pairs (i, j), counting
+    each edge twice, as in the paper's display (eq:gram); (e) chi''_{vec,3}
+    is defined as sSup of the objective <J, X o X> = ||X||_F^2 over the
+    feasible set of Coutinho–Spier–Zhang's program (8) (BN.ChiVec3Feasible:
+    X positive semidefinite, rank X <= 2, <I + A_{G^c}, X o X> = 1, X_ij >= 0
+    on edges) rather than as a maximum; the paper notes the maximum is
+    attained, and the theorem BN.chiVec3_eq_cliqueNum only needs the
+    supremum. The DecidableEq / DecidableRel hypotheses are artifacts of the
+    adjacency matrix and edge finset.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "Shengtong Zhang"
+  notes: >-
+    The five compared statements and the definitions they use
+    (adjacencyEigenvalues₀, lambda1, lambda2, F, turanFactor, inner, posPart,
+    e, IsCompletelyPositive, laplacianCoeff, M, gram, offEdgeMatrix,
+    ChiVec3Feasible, chiVec3) were audited by the human author against the
+    source note (see FORMALIZATION.md for the correspondence). Every proof
+    is machine-checked by Lean; `#print axioms` for each headline theorem
+    reports exactly propext, Classical.choice and Quot.sound, and the pinned
+    Comparator toolchain (with the NanoDa kernel) accepts Solution against
+    Challenge. No independent third-party review of the formalization has
+    been performed.
+
+alignment:
+  namespace: "BN"
+  statements:
+    - source: "sol.tex, Conjecture 1.1 (label conj:BN)"
+      lean: "BN.lambda1_sq_add_lambda2_sq_le"
+      module: "BN.Main"
+      status: proved
+      note: >-
+        lambda1 G ^ 2 + lambda2 G ^ 2 <= 2 * (1 - 1 / omega(G)) * |E(G)| in ℝ
+        for G ≠ ⊤ on a Nontrivial vertex type.
+    - source: "sol.tex, Theorem 1.2 (label thm:weighted)"
+      lean: "BN.weighted"
+      module: "BN.Spectral.Weighted"
+      status: proved
+      note: >-
+        F hB <= turanFactor G * inner B B for B Hermitian, entrywise
+        nonnegative, zero diagonal, B i j = 0 whenever ¬ G.Adj i j.
+    - source: "sol.tex, Theorem 1.3 (label thm:matrix)"
+      lean: "BN.matrix_theorem"
+      module: "BN.M.Main"
+      status: proved
+      note: >-
+        IsCompletelyPositive (M (gram z)) whenever w ≠ 0 and 0 <= w ⬝ᵥ z i for
+        all i, for z : n → Fin 2 → ℝ.
+    - source: "sol.tex, Theorem 1.4 (label thm:gram)"
+      lean: "BN.gram_le"
+      module: "BN.Spectral.Gram"
+      status: proved
+      note: >-
+        ∑ i j, A_G i j * (posPart X i j)^2 <= turanFactor G * inner X X for X
+        positive semidefinite of rank at most 2.
+    - source: "sol.tex, Corollary 5.3 (label cor:parameter)"
+      lean: "BN.chiVec3_eq_cliqueNum"
+      module: "BN.Spectral.Conic"
+      status: proved
+      note: "chiVec3 G = omega(G) for every graph on a nonempty finite vertex type."
+
+acknowledgements: >-
+  Mathlib and the Lean 4 community; the Palomar template for the Comparator
+  and CI layout.

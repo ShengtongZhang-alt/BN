@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "BN.lambda1_sq_add_lambda2_sq_le",
+    "BN.weighted",
+    "BN.matrix_theorem",
+    "BN.gram_le",
+    "BN.chiVec3_eq_cliqueNum"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

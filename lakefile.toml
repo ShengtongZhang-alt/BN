@@ -1,0 +1,29 @@
+name = "BN"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["BN", "Challenge", "Solution"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.0-rc1"
+
+[[lean_lib]]
+name = "BN"
+globs = ["BN.+"]
+
+# Palomar / Comparator surface: `Challenge` is the Mathlib-only statement module a reader
+# audits; `Solution` imports the full development and supplies the proofs.
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]
