@@ -4,7 +4,7 @@
 
 Ideation uses GPT 6 Astra, which also generated the manuscript [`docs/sol.tex`](docs/sol.tex).
 
-Formalization completed by Grok 4.6 in the Cursor Editor, directed by
+Formalization completed autonomously by Grok 4.6 in the Cursor Editor, with minimal direction by
 Shengtong Zhang (responsible maintainer); Palomar submission packaging by a
 Claude Fable 5.1 agent. See `automation` in
 [`formalization.yaml`](formalization.yaml) for the role breakdown.
