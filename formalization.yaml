@@ -158,7 +158,11 @@ sources:
     type: paper
     location: "https://arxiv.org/abs/2407.19341"
     relationship: background
-    note: "Linear Algebra Appl. 727 (2025), 1–9. The conjecture for graphs with few triangles."
+    note: >-
+      Linear Algebra Appl. 727 (2025), 1–9. The conjecture (in the
+      Elphick–Wocjan–Linz generalized form) for graphs with m edges and at
+      most O(m^{3/2 - eps}) triangles for some fixed eps > 0; in particular
+      planar, book-free and cycle-free graphs.
   - title: "Bollobás–Nikiforov conjecture holds asymptotically almost surely"
     authors: ["Chunmeng Liu", "Changjiang Bu"]
     id: "arXiv:2501.07137"

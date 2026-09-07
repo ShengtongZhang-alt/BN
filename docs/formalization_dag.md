@@ -6,7 +6,9 @@ Each **node is one lemma or definition**. A node is ready for a subagent only wh
 
 Status: `done` (compiles, no `sorry`), `sorry` (stated), `open` (not started), `wip` (claimed by a subagent).
 
-## Agent protocol
+**The development is complete: every node below is `done` and the build has no `sorry`** (see [`PROGRESS.md`](PROGRESS.md) and `VERIFICATION.md`). The agent protocol that follows is retained as a record of how the blueprint was executed.
+
+## Agent protocol (historical)
 
 1. Pick a source of the induced subgraph of `open`/`sorry` nodes whose dependencies are all `done`.
 2. Formalize **only that node**. Do not start a dependent node in the same pass.
@@ -1286,7 +1288,7 @@ is CP.
 
 **Statement.** `lambda1 G ^ 2 + lambda2 G ^ 2 ≤ 2 * turanFactor G * (G.edgeFinset.card : ℝ)` whenever `[Nontrivial V]` and `G ≠ ⊤`.
 
-**Route.** SP16, SP12 with `B = A_G`, N11. Edgeless graphs: `λ = 0` and `turanFactor = 0` or RHS `0`. The declaration already exists with `sorry`.
+**Route.** SP16, SP12 with `B = A_G`, N11. Edgeless graphs: `λ = 0` and `turanFactor = 0` or RHS `0`. Proved in `BN.Main` (no `sorry`).
 
 ---
 
@@ -1411,17 +1413,13 @@ is CP.
 | `BN.Spectral.Conic` | CG06–CG10 |
 | `BN.Main` | SP18 |
 
-## Ready sources (all deps done)
+## Work order (historical)
 
-Start here (no project dependencies):
+This section recorded the order in which nodes were unblocked while the
+development was in progress. All nodes are now `done` (see `PROGRESS.md`);
+it is kept only as a record of the build order.
 
-- N03, N06, N08, N09, N12, N14
-- CP01
-- TN01, TN05, TN07, TN08, TN10, TN14
-- KR01
-- EL01, EL07, EL08
-- SC08
-- SP01, SP13
-- CG02, CG06
-
-After `N09`: CP08. After `TN14`: TN16. Do not start `SP18` until SP12, SP16, N11, and N13 are `done`.
+Started first (no project dependencies): N03, N06, N08, N09, N12, N14; CP01;
+TN01, TN05, TN07, TN08, TN10, TN14; KR01; EL01, EL07, EL08; SC08; SP01, SP13;
+CG02, CG06. Then CP08 after N09, TN16 after TN14, and SP18 last, after SP12,
+SP16, N11 and N13.
