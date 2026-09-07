@@ -4,7 +4,7 @@
 version: "v0.4"
 
 project:
-  name: "The Bollobás–Nikiforov inequality for nonnegative edge weights"
+  name: "A proof of the Bollobás–Nikiforov conjecture in Lean"
   description: >-
     A complete Lean 4 / Mathlib formalization of the Bollobás–Nikiforov
     conjecture (2007) and of the matrix theorems that prove it. Let G be a

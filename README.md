@@ -1,4 +1,4 @@
-# The Bollobás–Nikiforov Inequality in Lean
+# A proof of the Bollobás–Nikiforov conjecture in Lean
 
 **Authors:** Gabriel Coutinho, Yinchen Liu, Thomás Jung Spier, Quanyu Tang, Shengtong Zhang
 
