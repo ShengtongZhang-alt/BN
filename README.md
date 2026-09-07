@@ -14,6 +14,8 @@ conjecture on the two largest adjacency eigenvalues of a graph, together with
 the weighted spectral inequality and the completely-positive matrix theorem
 that prove it, following the note [`docs/sol.tex`](docs/sol.tex).
 
+This repository has been registerd on [Palomar](https://palomar-registry.org/entry?id=PALOMAR-2026-09-07-000002&version=1).
+
 ## The theorems
 
 Let $G$ be a finite simple graph on $n$ vertices with adjacency matrix $A_G$,
