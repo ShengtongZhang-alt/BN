@@ -101,7 +101,7 @@ flowchart TD
 
 **Statement.** `F A` is `(max (lambdaMax A) 0)^2 + (max (lambdaSecond A) 0)^2` when `[Nontrivial n]`, and `(max (lambdaMax A) 0)^2` when `Fintype.card n = 1`.
 
-**Route.** `by_cases` on `Nontrivial n`. Missing eigenvalues are zero, matching `sol.tex` p. 95–96.
+**Route.** `by_cases` on `Nontrivial n`. Missing eigenvalues are zero, matching `sol.tex` lines 95–96.
 
 ### N05 — `F` is nonnegative and `F 0 = 0`
 

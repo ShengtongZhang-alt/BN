@@ -75,8 +75,9 @@ conjecture was known for graphs $G$ with $\chi(G) = \omega(G)$ by the
 theorem of Ando and Lin [[AL15]](https://doi.org/10.1016/j.laa.2015.08.007), for
 triangle-free graphs by Lin, Ning and Wu
 [[LNW21]](https://doi.org/10.1017/S0963548320000462), for regular graphs
-[[Zha24]](https://doi.org/10.1016/j.laa.2024.01.002), for graphs with few
-triangles [[KP25]](https://arxiv.org/abs/2407.19341) and for related classes
+[[Zha24]](https://doi.org/10.1016/j.laa.2024.01.002), for graphs with $m$
+edges and $O(m^{3/2-\varepsilon})$ triangles
+[[KP25]](https://arxiv.org/abs/2407.19341) and for related classes
 [[ZZ25]](https://doi.org/10.1016/j.laa.2025.01.037), and asymptotically almost surely for random graphs
 [[LB25]](https://arxiv.org/abs/2501.07137). Complete multipartite graphs are
 weakly perfect and hence covered by [AL15]; Giacomelli

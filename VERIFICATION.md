@@ -37,7 +37,7 @@ Results:
   `68d5ca9`): the five statements in `Solution` match `Challenge`, "Nanoda
   kernel accepts the solution", "Lean default kernel accepts the solution",
   "Your solution is okay!".
-- The `pp.all` printouts of the five theorem types and of the fifteen
+- The `pp.all` printouts of the five theorem types and of the sixteen
   definitions they use are byte-identical in the `Challenge` and `Solution`
   environments.
 
