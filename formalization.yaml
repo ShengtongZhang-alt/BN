@@ -342,15 +342,8 @@ automation:
         hardware: "API-hosted model."
   spend_usd: "not tracked"
   notes: >-
-    Human-directed, agent-executed workflow. Human roles: the five people in
-    project.authors are the coauthors of the mathematics in the source note
-    docs/sol.tex, which is the result being formalized, and are credited as
-    project authors on that basis. Of them, Shengtong Zhang is the sole
-    responsible maintainer and carried out all Lean-side human work: fixing
-    the Lean statement of the conjecture and the spectral conventions in
-    BN/Definition.lean, approving the blueprint, directing the agents, and
-    auditing the statements in Challenge.lean against the note. The other
-    four authors did not write or direct Lean code. Grok 4.6 agents produced
+    Human-directed, agent-executed workflow. Shengtong Zhang is the
+    responsible maintainer of this repository. Grok 4.6 agents produced
     essentially all of the roughly 15,700 lines of Lean code (phase 1 above);
     a Claude Fable 5.1 agent produced the submission packaging (phase 2); GPT
     6 Astra generated the manuscript (phase 0). Correctness of proofs rests on
