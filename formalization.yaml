@@ -275,6 +275,7 @@ status:
 
 automation:
   methods:
+    # Phase 1: the Lean proof development (all of BN/).
     - method: agent
       models: ["Grok 4.6 (xAI)"]
       framework: "Cursor"
@@ -287,35 +288,70 @@ automation:
         tracked in docs/PROGRESS.md. Each node was checked by `lake build`
         and the axiom report before being marked done. Standard Lean/Mathlib
         tactics were used; no proof-search tools external to Lean and Mathlib.
-        The Palomar submission surface (Challenge.lean, Solution.lean,
-        comparator.json, this file, the scripts/ checks and the CI workflow)
-        was assembled afterwards by a Claude Fable 5.1 agent in Cursor,
-        following the layout of the maintainer's Nikodym repository; it adds no
-        proof content.
+        The one exception to agent authorship is BN/Basic/Graph.lean, copied
+        from the maintainer's SqOmega repository (see related_formalizations).
       cost:
         wall_time: "Approximately one day of elapsed agent time (the development is dated 2026-09-05)."
         spend_usd: "not tracked"
         hardware: "Local Apple Silicon Mac for Lean builds; API-hosted models."
       prompting_notes: >-
-        The human maintainer (a coauthor of the source note) supplied
-        docs/sol.tex and the target statement
+        The human maintainer (Shengtong Zhang, a coauthor of the source note)
+        supplied docs/sol.tex and the target statement
         BN.lambda1_sq_add_lambda2_sq_le with its definitions in
         BN/Definition.lean, reviewed the blueprint, and directed the
         decomposition into nodes. Agents were prompted node by node with the
         blueprint statement, the mathematical proof from the note, and the
         interfaces of already completed nodes, and were required to leave the
         build free of sorry.
+    # Phase 2: the Palomar submission surface (no proof content).
+    - method: agent
+      models: ["Claude Fable 5.1 (Anthropic)"]
+      framework: "Cursor"
+      tool_setup: >-
+        Assembled Challenge.lean, Solution.lean, comparator.json, this file,
+        README.md / README_lean.md / FORMALIZATION.md / VERIFICATION.md, the
+        scripts/ checks and the CI workflow, following the layout of the
+        maintainer's Nikodym repository. Verified the Challenge/Solution
+        statement match with `pp.all` printouts and a local Comparator run,
+        and fixed one duplicate-declaration clash in BN/Kernel/Data.lean
+        (a lemma rename, no proof change). Adds no proof content.
+      cost:
+        wall_time: "A few hours of elapsed agent time (2026-09-05 to 2026-09-06)."
+        spend_usd: "not tracked"
+        hardware: "Local Apple Silicon Mac; API-hosted model."
+      prompting_notes: >-
+        Directed interactively by the maintainer: prepare the repository for
+        Palomar submission as in the Nikodym repository, set the author list
+        and literature comparison, and revise metadata in response to
+        Palomar-style review feedback.
+    # Phase 0 (before the formalization): the source manuscript docs/sol.tex.
+    - method: other
+      models: ["GPT 6 Astra (OpenAI)"]
+      tool_setup: >-
+        Not a Lean phase. GPT 6 Astra was used by the authors in the ideation
+        of the mathematics and generated the manuscript docs/sol.tex that the
+        formalization follows; the mathematics was developed in collaboration
+        with it by the five human authors (see README.md, "Writeup"). Recorded
+        here because the source being formalized is itself AI-generated.
+      cost:
+        spend_usd: "not tracked"
+        hardware: "API-hosted model."
   spend_usd: "not tracked"
   notes: >-
-    Human-directed, agent-executed workflow. The human maintainer (a coauthor of the
-    source note) fixed the Lean statement of the conjecture and the spectral
-    conventions in BN/Definition.lean, approved the blueprint, and audited the
-    statements in Challenge.lean against the note; Grok 4.6 agents produced
-    essentially all of the roughly 15,700 lines of Lean code. Correctness of
-    proofs rests on the Lean kernel; the statements in Challenge.lean are the
-    human-audited surface. Separately from the formalization, GPT 6 Astra was
-    used in the ideation of the mathematics and generated the manuscript
-    docs/sol.tex that the formalization follows (see README.md).
+    Human-directed, agent-executed workflow. Human roles: the five people in
+    project.authors are the coauthors of the mathematics in the source note
+    docs/sol.tex, which is the result being formalized, and are credited as
+    project authors on that basis. Of them, Shengtong Zhang is the sole
+    responsible maintainer and carried out all Lean-side human work: fixing
+    the Lean statement of the conjecture and the spectral conventions in
+    BN/Definition.lean, approving the blueprint, directing the agents, and
+    auditing the statements in Challenge.lean against the note. The other
+    four authors did not write or direct Lean code. Grok 4.6 agents produced
+    essentially all of the roughly 15,700 lines of Lean code (phase 1 above);
+    a Claude Fable 5.1 agent produced the submission packaging (phase 2); GPT
+    6 Astra generated the manuscript (phase 0). Correctness of proofs rests on
+    the Lean kernel; the statements in Challenge.lean are the human-audited
+    surface.
 
 fidelity:
   divergences: >-

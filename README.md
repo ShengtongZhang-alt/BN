@@ -4,7 +4,10 @@
 
 Ideation uses GPT 6 Astra, which also generated the manuscript [`docs/sol.tex`](docs/sol.tex).
 
-Formalization completed by Grok 4.6 in the Cursor Editor.
+Formalization completed by Grok 4.6 in the Cursor Editor, directed by
+Shengtong Zhang (responsible maintainer); Palomar submission packaging by a
+Claude Fable 5.1 agent. See `automation` in
+[`formalization.yaml`](formalization.yaml) for the role breakdown.
 
 This repository is a Lean 4 and Mathlib formalization of the Bollobás–Nikiforov
 conjecture on the two largest adjacency eigenvalues of a graph, together with
