@@ -202,7 +202,7 @@ sources:
 # formalization of the Bollobás–Nikiforov conjecture itself, or of completely
 # positive / totally nonnegative matrices.
 related_formalizations:
-  - id: "https://github.com/ShengtongZhang-alt/SqOmega/tree/e988319dceceb94ae956890a3547af0062465e3e"
+  - id: "https://github.com/ShengtongZhang-alt/SqOmega/tree/571b9ba92491d8d1adf584c71b2cfcddac3c36e2"
     relationship: builds-on
     note: >-
       Lean 4 / Mathlib formalization (Liu, Tang, Zhang; public since July
